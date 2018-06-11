@@ -1,0 +1,139 @@
+//
+//  PrefixHeader.pch
+//  AntCarsRepair
+//
+//  Created by 宇中 on 2018/6/7.
+//  Copyright © 2018年 广州宇中网络科技有限公司. All rights reserved.
+//
+
+//$(SRCROOT)/Supporting Files/AntCarsRepair/PrefixHeader.pch
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import <MBProgressHUD/MBProgressHUD.h>
+#import "SVProgressHUD.h"
+#import "UIView+Layout.h"
+#import "UIImage+Extension.h"
+#import "NotificationHeader.h"
+#import "UIFont+Font.h"
+#import "IQKeyboardManager.h"
+#import "Masonry.h"
+#import "MJExtension.h"
+#import "MJRefresh.h"
+#import "UITableViewCell+Extension.h"
+#import "GCD.h"
+#import "UIColor+Extention.h"
+#import "NSString+Extension.h"
+
+//***************************************  服务器  ***************************************\\
+
+//***************************************  服务器  ***************************************\\
+
+
+//***************************************  信息打印  ***************************************\\
+#ifdef DEBUG
+
+#define LRLog(...) NSLog(@"%s %d \n %@ \n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
+
+#else
+
+#define LRLog(...)
+
+#endif
+//***************************************  信息打印  ***************************************\\
+
+#define LRAppKeyWindow [UIApplication sharedApplication].keyWindow
+
+#define PlaceholderImage [UIImage imageNamed:@"220"]
+#define PlaceholderRoundImage [UIImage imageNamed:@"huisemorentouxiang"]
+
+
+/***********************  RGB颜色  **************************/
+#define LRColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+
+#define LRColorAlpha(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+/***********************  随机颜色  **************************/
+
+#define LRRandomColor LRColor(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
+
+/***********************  系统分割线颜色  **************************/
+
+#define LRSystermNavSepLineColor LRColor(178, 178, 178);
+
+#define LRSystermCellSepLineColor LRColor(200, 199, 204);
+
+/***********************  控制器背景色  **************************/
+#define LRControllerBackGroundColor [UIColor colorWithHexColorValue:@"#ededed" alpha:1.0]//SMColor(241, 242, 244);
+
+/***********************  app中常用到的红色和灰色  **************************/
+
+#define LRBlackColor [UIColor colorWithHexColorValue:@"#222222" alpha:1.0]
+#define KMainColor [UIColor colorWithHexColorValue:@"#00aaee" alpha:1.0]
+#define KGlobalColor LRColor(41, 41, 41)
+
+/****************  字体  ****************/
+
+#define LRFont(size)  [UIFont systemFontOfSize:(size)*LRMatch]
+#define LRBoldFont(size)  [UIFont boldSystemFontOfSize:(size)*LRMatch]
+
+/****************   一次性获取几个数据   *****************/
+#define LRRequestProductNumber 998
+
+//导航栏图片大小
+#define ScaleToSmallSize CGSizeMake(22, 22)
+#define ScaleToSize CGSizeMake(24, 24)
+#define ScaleToMaxSize CGSizeMake(26, 26)
+#define ScaleFanhuiSize CGSizeMake(28, 28)
+
+//判断有没有底部tabbar
+#define KTabBarHidden (self.navigationController.childViewControllers.count > 1)
+
+/***********************  根据屏幕高度判断手机设备  **************************/
+
+#define isIPhone4vs5 ([UIScreen mainScreen].bounds.size.width == 320)
+#define isIPhone4 ([UIScreen mainScreen].bounds.size.height == 480)
+#define isIPhone5 ([UIScreen mainScreen].bounds.size.height == 568)
+#define isIPhone6 ([UIScreen mainScreen].bounds.size.height == 667)
+#define isIPhone6p ([UIScreen mainScreen].bounds.size.height == 736)
+
+#define isIPhoneX ([UIScreen mainScreen].bounds.size.height == 812)
+#define IPhoneX_NavgationBarHeight 84
+#define IPhoneX_StatusBarHeight 44
+#define IPhoneX_TabBarHeight 83
+#define IPhone_BottomMargin (isIPhoneX ? (IPhoneX_TabBarHeight-49) : 0) //ipone x底部弧形高度IPhoneX_TabBarHeight-49
+#define NavgationHeight (isIPhoneX ? IPhoneX_NavgationBarHeight : 64)
+#define TabBarHeight (isIPhoneX ? IPhoneX_TabBarHeight : 49)  //self.tabBarController.tabBar.frame.size.height
+#define StatusBarHeight (isIPhoneX ? IPhoneX_StatusBarHeight : 20)
+
+/***********************  屏幕宽高  **************************/
+#define LRScreenWidth [UIScreen mainScreen].bounds.size.width
+#define LRScreenHeight [UIScreen mainScreen].bounds.size.height
+
+//屏幕适配系数
+#define LRScreenScale [UIScreen mainScreen].scale
+#define LRLayoutScale 1.171875//(375/320)这样不行 plus 也用 6 系列的适配
+#define LRMatch (isIPhone4vs5 ? 1 : LRLayoutScale)//LRScreenWidth / 320
+#define LRMatchHeight (LRScreenHeight / 568 * 1.0)
+#define LRMatchWidth (LRScreenWidth / 320 * 1.0)
+
+#define NavTitleMaxLength 13
+#define KNavTitleFont 16 * LRMatch
+#define KNavButtonTitleFont [UIFont systemFontOfSize:15 * LRMatch]
+
+#define ShowErrorTime 2.5
+#define LRWeakSelf    __weak typeof(self) weakSelf = self;
+#define LRStrongSelf  __strong typeof(weakSelf) strongSelf = weakSelf;
+
+
+//MBProgressHUD  提示框  一般网络请求时可以用这个
+#define LRShowPrompt(message)  MBProgressHUD *HUD = nil;HUD.bezelView.color = [UIColor lightGrayColor];HUD.label.text = (message);HUD.label.textColor = [UIColor whiteColor];HUD.bezelView.color = [UIColor blackColor];HUD.alpha = 0.4;HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+#define LRShowfreshMessage(freshView,message)  MBProgressHUD *HUD = nil;if (![(freshView).mj_header isRefreshing] && ![(freshView).mj_footer isRefreshing]) {HUD.bezelView.color = [UIColor blackColor];HUD.label.text = (message);HUD.label.textColor = [UIColor whiteColor];HUD.alpha = 0.5;HUD = [MBProgressHUD showHUDAddedTo:(freshView) animated:YES];}
+
+#define LRShowfreshView(superView,freshView,message)  MBProgressHUD *HUD = nil;if (![(freshView).mj_header isRefreshing] && ![(freshView).mj_footer isRefreshing]) {HUD.bezelView.color = [UIColor blackColor];HUD.label.text = (message);HUD.label.textColor = [UIColor whiteColor];HUD.alpha = 0.5;HUD = [MBProgressHUD showHUDAddedTo:(superView) animated:YES];}
+
+#define LRShowHud(superView,message)  MBProgressHUD *HUD = nil;HUD.bezelView.color = [UIColor lightGrayColor];HUD.label.text = (message);HUD.label.textColor = [UIColor whiteColor];HUD.bezelView.color = [UIColor blackColor];HUD.alpha = 0.4;HUD = [MBProgressHUD showHUDAddedTo:superView animated:YES];
+
+#define LRShowError [MBProgressHUD showError:error.localizedDescription]
+
+//#endif

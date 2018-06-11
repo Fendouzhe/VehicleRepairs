@@ -1,0 +1,20 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '8.0'
+
+target 'AntCarsRepair' do
+    
+    pod 'AFNetworking', '~> 3.2.1'
+    pod 'SDWebImage', '~> 4.4.0'
+    pod 'MBProgressHUD', '~> 1.1.0'
+    #pod 'SVProgressHUD', '~> 2.2.5'
+    pod 'Masonry', '~> 1.1.0'
+    pod 'MJExtension', '~> 3.0.15'
+    pod 'MJRefresh', '~> 3.1.15.3'
+    #pod 'AMapLocation', '~> 2.6.0'
+    #pod 'AMap2DMap', '~> 5.6.0' #地图和导航 'AMapNavi' 冲突
+    #pod 'AMap3DMap', '~> 6.2.0'
+    #pod 'AMapSearch', '~> 6.1.1'
+    #pod 'AMapNavi'
+    pod 'IQKeyboardManager', '~> 6.0.3'
+
+end
